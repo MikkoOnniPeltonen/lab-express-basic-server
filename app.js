@@ -2,6 +2,10 @@
 // Here you should import the required packages for your Express app: `express` and `morgan`
 
 const express = require('express')
+
+const projects = require('./data/projects.json')
+const articles = require('./data/articles.json')
+
 const logger = require('morgan')
 
 
@@ -26,26 +30,26 @@ app.get('/blog', (req, res) => {
     res.sendFile(__dirname + '/views/blog.html')
 })
 
-app.get('/home', (req, res) => {
+app.get('/', (req, res) => {
     res.sendFile(__dirname + '/views/home.html')
 })
 
 app.get('/api/projects', (req, res) => {
 
-    res.sendFile(__dirname + '/data/projects.json')
+    res.json(projects)
 })
 
 app.get('/api/articles', (req, res) => {
 
-    res.sendFile(__dirname + '/data/articles.json')
+    res.json(articles)
 })
 
 app.get('*', (req, res) => {
-    res.sendFile(__dirname + '/views/not-found.html')
+    res.status(404).sendFile(__dirname + '/views/not-found.html')
 })
 
 
 
 // START THE SERVER
 // Make your Express server listen on port 5005:
-app.listen(5005)
+app.listen()
